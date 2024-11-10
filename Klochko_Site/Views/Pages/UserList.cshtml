@@ -1,0 +1,305 @@
+﻿@model Tuple<IEnumerable<Klochko_Site.Models.UserCredential>, IEnumerable<Klochko_Site.Models.Employee>, IEnumerable<Klochko_Site.Models.Branch>>
+
+<h1>Список пользователей</h1>
+<a class="btn btn-primary" data-bs-toggle="collapse" href="#createUserForm" role="button" aria-expanded="false" aria-controls="createUserForm">Добавить нового пользователя</a>
+
+<!-- Форма для добавления нового пользователя -->
+<div class="collapse" id="createUserForm">
+    <div class="card card-body mt-3">
+        <h3>Добавить нового пользователя</h3>
+        <form method="post" asp-action="CreateUser">
+            <div class="form-group">
+                <label for="Username">Логин</label>
+                <input type="text" class="form-control" id="Username" name="Username" required />
+            </div>
+            <div class="form-group">
+                <label for="Role">Роль</label>
+                <select class="form-control" id="Role" name="Role" required>
+                    <option value="admin">Администратор</option>
+                    <option value="operator">Оператор</option>
+                    <option value="client">Клиент</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Password">Пароль</label>
+                <input type="password" class="form-control" id="Password" name="Password" required />
+            </div>
+            <button type="submit" class="btn btn-success mt-3">Добавить</button>
+        </form>
+    </div>
+</div>
+
+<!-- Форма для редактирования пользователя -->
+<div class="collapse" id="editUserForm">
+    <div class="card card-body mt-3">
+        <h3>Редактировать пользователя</h3>
+        <form method="post" asp-action="EditUser">
+            <div class="form-group">
+                <input type="hidden" id="EditUserId" name="Id" />
+                <label for="EditUsername">Логин</label>
+                <input type="text" class="form-control" id="EditUsername" name="Username" required />
+            </div>
+            <div class="form-group">
+                <label for="EditRole">Роль</label>
+                <select class="form-control" id="EditRole" name="Role" required>
+                    <option value="admin">Администратор</option>
+                    <option value="operator">Оператор</option>
+                    <option value="client">Клиент</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="EditPassword">Пароль</label>
+                <input type="password" class="form-control" id="EditPassword" name="Password" required />
+            </div>
+            <button type="submit" class="btn btn-warning mt-3">Сохранить изменения</button>
+        </form>
+    </div>
+</div>
+
+<!-- Таблица пользователей -->
+<table class="table mt-4">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Логин</th>
+            <th>Роль</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Item1)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Username</td>
+                <td>@user.Role</td>
+                <td>
+                    <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#editUserForm" aria-expanded="false" aria-controls="editUserForm"
+                            onclick="populateEditForm(@user.Id, '@user.Username', '@user.Role')">
+                        Редактировать
+                    </button>
+                    <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!-- Управление сотрудниками -->
+
+<h2>Список сотрудников</h2>
+<a class="btn btn-primary" data-bs-toggle="collapse" href="#createEmployeeForm" role="button" aria-expanded="false" aria-controls="createEmployeeForm">Добавить нового сотрудника</a>
+<table class="table mt-4">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>ФИО</th>
+            <th>Должность</th>
+            <th>Телефон</th>
+            <th>Email</th>
+            <th>ID Филиала</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model.Item2)
+        {
+            <tr>
+                <td>@employee.EmployeeId</td>
+                <td>@employee.FullName</td>
+                <td>@employee.Position</td>
+                <td>@employee.Phone</td>
+                <td>@employee.Email</td>
+                <td>@employee.BranchId</td>
+                <td>
+                    <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#editEmployeeForm" aria-expanded="false"
+                            onclick="populateEditEmployeeForm(@employee.EmployeeId, '@employee.FullName', '@employee.Position', '@employee.Phone', '@employee.Email', @employee.BranchId)">
+                        Редактировать
+                    </button>
+                    <form asp-action="DeleteEmployee" asp-route-id="@employee.EmployeeId" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Форма для добавления сотрудника -->
+
+
+<div class="collapse" id="createEmployeeForm">
+    <div class="card card-body mt-3">
+        <h3>Добавить нового сотрудника</h3>
+        <form asp-action="CreateEmployee" method="post">
+            <div class="form-group">
+                <label for="FullName">ФИО</label>
+                <input type="text" class="form-control" id="FullName" name="FullName" required />
+            </div>
+            <div class="form-group">
+                <label for="Position">Должность</label>
+                <input type="text" class="form-control" id="Position" name="Position" />
+            </div>
+            <div class="form-group">
+                <label for="Phone">Телефон</label>
+                <input type="text" class="form-control" id="Phone" name="Phone" />
+            </div>
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="email" class="form-control" id="Email" name="Email" />
+            </div>
+            <div class="form-group">
+                <label for="BranchId">ID Отделения</label>
+                <input type="number" class="form-control" id="BranchId" name="BranchId" />
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Добавить сотрудника</button>
+        </form>
+    </div>
+</div>
+
+<!-- Форма для редактирования сотрудника -->
+<div class="collapse" id="editEmployeeForm">
+    <div class="card card-body mt-3">
+        <h3>Редактировать сотрудника</h3>
+        <form method="post" asp-action="EditEmployee">
+            <input type="hidden" id="EditEmployeeId" name="EmployeeId" />
+            <div class="form-group">
+                <label for="EditFullName">ФИО</label>
+                <input type="text" class="form-control" id="EditFullName" name="FullName" required />
+            </div>
+            <div class="form-group">
+                <label for="EditPosition">Должность</label>
+                <input type="text" class="form-control" id="EditPosition" name="Position" />
+            </div>
+            <div class="form-group">
+                <label for="EditPhone">Телефон</label>
+                <input type="text" class="form-control" id="EditPhone" name="Phone" />
+            </div>
+            <div class="form-group">
+                <label for="EditEmail">Email</label>
+                <input type="email" class="form-control" id="EditEmail" name="Email" />
+            </div>
+            <div class="form-group">
+                <label for="EditBranchId">ID Филиала</label>
+                <input type="number" class="form-control" id="EditBranchId" name="BranchId" />
+            </div>
+            <button type="submit" class="btn btn-warning mt-3">Сохранить изменения</button>
+        </form>
+    </div>
+</div>
+
+<h2>Список отделений</h2>
+<a class="btn btn-primary" data-bs-toggle="collapse" href="#createBranchForm" role="button" aria-expanded="false" aria-controls="createBranchForm">Добавить новое отделение</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Адрес</th>
+            <th>Телефон</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var branch in Model.Item3)
+        {
+            <tr>
+                <td>@branch.BranchName</td>
+                <td>@branch.Address</td>
+                <td>@branch.Phone</td>
+                <td>
+                    <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#editBranchForm" aria-expanded="false"
+                            onclick="showEditForm(@branch.BranchId, '@branch.BranchName', '@branch.Address', '@branch.Phone')">
+                        Редактировать
+                    </button>
+                    <form asp-action="DeleteBranch" asp-route-id="@branch.BranchId" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="collapse" id="editBranchForm">
+    <div class="card card-body mt-3">
+        <h3>Редактировать отделение</h3>
+        <form asp-action="EditBranch" method="post" id="editBranchForm">
+            <input type="hidden" id="editBranchId" name="BranchId" />
+            <div class="form-group">
+                <label for="editBranchName">Название отделения</label>
+                <input type="text" class="form-control" id="editBranchName" name="BranchName" required />
+            </div>
+            <div class="form-group">
+                <label for="editAddress">Адрес</label>
+                <input type="text" class="form-control" id="editAddress" name="Address" />
+            </div>
+            <div class="form-group">
+                <label for="editPhone">Телефон</label>
+                <input type="text" class="form-control" id="editPhone" name="Phone" />
+            </div>
+            <button type="submit" class="btn btn-warning mt-3">Сохранить изменения</button>
+        </form>
+    </div>
+</div>
+
+
+<!-- Форма для нового отделения -->
+<div class="collapse" id="createBranchForm">
+    <div class="card card-body mt-3">
+        <h3>Добавить новое отделение</h3>
+        <form asp-action="AddBranch" method="post">
+            <div class="form-group">
+                <label for="BranchName">Название отделения</label>
+                <input type="text" class="form-control" id="BranchName" name="BranchName" required />
+            </div>
+            <div class="form-group">
+                <label for="Address">Адрес</label>
+                <input type="text" class="form-control" id="Address" name="Address" />
+            </div>
+            <div class="form-group">
+                <label for="Phone">Телефон</label>
+                <input type="text" class="form-control" id="Phone" name="Phone" />
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Добавить отделение</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+    function populateEditEmployeeForm(id, fullName, position, phone, email, branchId) {
+        document.getElementById('EditEmployeeId').value = id;
+        document.getElementById('EditFullName').value = fullName;
+        document.getElementById('EditPosition').value = position;
+        document.getElementById('EditPhone').value = phone;
+        document.getElementById('EditEmail').value = email;
+        document.getElementById('EditBranchId').value = branchId;
+    }
+</script>
+
+
+<script>
+    function populateEditForm(id, username, role) {
+        // Заполняем поля формы редактирования
+        document.getElementById('EditUserId').value = id;
+        document.getElementById('EditUsername').value = username;
+        document.getElementById('EditRole').value = role;
+    }
+</script>
+
+
+
+<script>
+    function showEditForm(branchId, branchName, address, phone) {
+        // Заполняем поля формы редактирования значениями
+        document.getElementById('editBranchId').value = branchId;
+        document.getElementById('editBranchName').value = branchName;
+        document.getElementById('editAddress').value = address;
+        document.getElementById('editPhone').value = phone;
+    }
+</script>
