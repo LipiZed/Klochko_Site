@@ -1,0 +1,79 @@
+﻿@model Klochko_Site.Models.Customer
+
+@{
+    ViewData["Title"] = "Профиль клиента";
+}
+
+<h2>Профиль клиента</h2>
+
+<div class="customer-details">
+    <p><strong>Имя клиента:</strong> @(Model?.FullName ?? "Не указано")</p>
+    <p><strong>Телефон:</strong> @(Model?.Phone ?? "Не указано")</p>
+    <p><strong>Email:</strong> @(Model?.Email ?? "Не указано")</p>
+    <p><strong>Адрес:</strong> @(Model?.Address ?? "Не указано")</p>
+    <p><strong>Дата регистрации:</strong> @(Model?.DateRegistered?.ToString("yyyy-MM-dd") ?? "Не указана")</p>
+</div>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<h3>Посылки, отправленные клиентом</h3>
+@if (Model?.PackageSenders != null && Model.PackageSenders.Any())
+{
+    <ul>
+        @foreach (var package in Model.PackageSenders)
+        {
+            <li>
+                <strong>ID посылки:</strong> @package.PackageId<br />
+                <strong>Получатель:</strong> @(package.Receiver.FullName ?? "Получатель не указан")<br />
+                <strong>Тип посылки:</strong> @(package.Type.TypeName ?? "Тип не указан")<br />
+                <strong>Статус:</strong> @(package.Status ?? "Не указан")<br />
+                <strong>Вес:</strong> @(package.Weight.HasValue ? $"{package.Weight} кг" : "Вес не указан")<br />
+                <strong>Дата отправки:</strong> @(package.DateSent?.ToString("yyyy-MM-dd") ?? "Не указана")<br />
+                <strong>Дата доставки:</strong> @(package.DateDelivered?.ToString("yyyy-MM-dd") ?? "Не указана")
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Нет отправленных посылок.</p>
+}
+
+<h3>Посылки, полученные клиентом</h3>
+@if (Model?.PackageReceivers != null && Model.PackageReceivers.Any())
+{
+    <ul>
+        @foreach (var package in Model.PackageReceivers)
+        {
+            <li>
+                <strong>ID посылки:</strong> @package.PackageId<br />
+                <strong>Отправитель:</strong> @(package.Sender?.FullName ?? "Отправитель не указан")<br />
+                <strong>Тип посылки:</strong> @(package.Type?.TypeName ?? "Тип не указан")<br />
+                <strong>Статус:</strong> @(package.Status ?? "Не указан")<br />
+                <strong>Вес:</strong> @(package.Weight.HasValue ? $"{package.Weight} кг" : "Вес не указан")<br />
+                <strong>Дата отправки:</strong> @(package.DateSent?.ToString("yyyy-MM-dd") ?? "Не указана")<br />
+                <strong>Дата доставки:</strong> @(package.DateDelivered?.ToString("yyyy-MM-dd") ?? "Не указана")<br />
+                @if (package.Status == "В пути")
+                {
+                    <form asp-action="ConfirmDelivery" method="post" style="display:inline;">
+                        <input type="hidden" name="packageId" value="@package.PackageId" />
+                        <button type="submit" class="btn btn-success btn-sm">Подтвердить получение</button>
+                    </form>
+                }
+                
+            </li>
+            
+        }
+    </ul>
+}
+else
+{
+    <p>Нет полученных посылок.</p>
+}
+
+<div class="send-package">
+    <a href="@Url.Action("SendPackage", "Client")" class="btn btn-primary mt-3">Отправить посылку</a>
+</div>

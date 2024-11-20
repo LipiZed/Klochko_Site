@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Отправить посылку";
+}
+
+<h2>Отправить посылку</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<form asp-action="SendPackage" method="post">
+    <div class="form-group">
+        <label for="receiverId">Получатель</label>
+        <select id="receiverId" name="receiverId" class="form-control" required>
+            <option value="">Выберите получателя</option>
+            @foreach (var customer in (IEnumerable<Klochko_Site.Models.Customer>)ViewData["Customers"])
+            {
+                <option value="@customer.CustomerId">@customer.FullName</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="branchId">Отделение</label>
+        <select id="branchId" name="branchId" class="form-control" required>
+            <option value="">Выберите отделение</option>
+            @foreach (var branch in (IEnumerable<Klochko_Site.Models.Branch>)ViewData["Branches"])
+            {
+                <option value="@branch.BranchId">@branch.BranchName</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="typeId">Тип посылки</label>
+        <select id="typeId" name="typeId" class="form-control" required>
+            <option value="">Выберите тип</option>
+            @foreach (var type in (IEnumerable<Klochko_Site.Models.PackageType>)ViewData["PackageTypes"])
+            {
+                <option value="@type.TypeId">@type.TypeName</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="weight">Вес (кг)</label>
+        <input type="number" step="0.01" id="weight" name="weight" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="dimensions">Размеры (например, 10x10x10)</label>
+        <input type="text" id="dimensions" name="dimensions" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Отправить посылку</button>
+</form>

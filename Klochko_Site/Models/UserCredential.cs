@@ -12,4 +12,8 @@ public partial class UserCredential
     public string Role { get; set; } = null!;
 
     public string Password { get; set; } = null!;
+
+    public int? CustomerId { get; set; }
+
+    public virtual Customer? Customer { get; set; }
 }

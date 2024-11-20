@@ -29,22 +29,28 @@ public class AccountController : Controller
         if (user != null)
         {
             var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.Role, user.Role)
-        };
+            {
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Role, user.Role)
+            };
+
+            // Добавляем CustomerID как дополнительный claim
+            if (user.CustomerId.HasValue)
+            {
+                claims.Add(new Claim("CustomerId", user.CustomerId.Value.ToString()));
+            }
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
 
-            // Перенаправление к первоначально запрошенному URL
-            string returnUrl = Request.Query["ReturnUrl"];
-            if (!string.IsNullOrEmpty(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
+            //// Перенаправление к первоначально запрошенному URL
+            //string returnUrl = Request.Query["ReturnUrl"];
+            //if (!string.IsNullOrEmpty(returnUrl))
+            //{
+            //    return Redirect(returnUrl);
+            //}
 
             return RedirectToAction("Index", "Home");
         }

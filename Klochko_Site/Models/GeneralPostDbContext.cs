@@ -232,6 +232,10 @@ public partial class GeneralPostDbContext : DbContext
             entity.Property(e => e.Password).HasMaxLength(50);
             entity.Property(e => e.Role).HasMaxLength(50);
             entity.Property(e => e.Username).HasMaxLength(256);
+
+            entity.HasOne(d => d.Customer).WithMany(p => p.UserCredentials)
+                .HasForeignKey(d => d.CustomerId)
+                .HasConstraintName("FK_UserCredentials_Customer");
         });
 
         OnModelCreatingPartial(modelBuilder);

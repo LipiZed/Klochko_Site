@@ -1,0 +1,10 @@
+Package ID: {{PackageId}}
+Sender: {{SenderName}}
+Receiver: {{ReceiverName}}
+Branch: {{BranchName}}
+Package Type: {{PackageType}}
+Weight: {{Weight}} kg
+Dimensions: {{Dimensions}}
+Status: {{Status}}
+Date Sent: {{DateSent}}
+Date Delivered: {{DateDelivered}}

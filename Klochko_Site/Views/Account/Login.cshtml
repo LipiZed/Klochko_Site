@@ -1,24 +1,84 @@
 ﻿@{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Вход в систему";
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card shadow-sm p-4" style="max-width: 400px; width: 100%;">
+        <!-- Title Section -->
+        <h2 class="text-center text-primary mb-4">@ViewData["Title"]</h2>
 
-<form method="post">
-    <div class="form-group">
-        <label for="Username">Имя пользователя</label>
-        <input type="text" class="form-control" id="Username" name="username" required />
-    </div>
-    <div class="form-group">
-        <label for="Password">Пароль</label>
-        <input type="password" class="form-control" id="Password" name="password" required />
-    </div>
-    <button type="submit" class="btn btn-primary">Войти</button>
-</form>
+        <!-- Login Form -->
+        <form method="post">
+            <!-- Username Field -->
+            <div class="form-group mb-3">
+                <label for="Username" class="form-label">Имя пользователя</label>
+                <input type="text" class="form-control" id="Username" name="username" placeholder="Введите ваше имя пользователя" required>
+            </div>
 
-@if (!ViewData.ModelState.IsValid)
-{
-    <div class="alert alert-danger mt-3">
-        <strong>Ошибка:</strong> Неверный логин или пароль.
+            <!-- Password Field -->
+            <div class="form-group mb-4">
+                <label for="Password" class="form-label">Пароль</label>
+                <input type="password" class="form-control" id="Password" name="password" placeholder="Введите ваш пароль" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-block w-100">Войти</button>
+        </form>
+
+        <!-- Error Message -->
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger mt-3 text-center">
+                <strong>Ошибка:</strong> Неверный логин или пароль.
+            </div>
+        }
+
+        <!-- Forgot Password Link -->
+        <div class="text-center mt-3">
+            <a href="@Url.Action("ForgotPassword", "Account")" class="text-muted">Забыли пароль?</a>
+        </div>
     </div>
-}
+</div>
+
+<!-- CSS Styling -->
+<style>
+    body {
+        background: #f7f9fc;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+        background-color: #ffffff;
+    }
+
+    .text-primary {
+        color: #007bff;
+    }
+
+    .form-label {
+        font-weight: 500;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .alert-danger {
+        border-radius: 5px;
+        padding: 10px;
+    }
+</style>

@@ -22,4 +22,6 @@ public partial class Customer
     public virtual ICollection<Package> PackageSenders { get; set; } = new List<Package>();
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
+
+    public virtual ICollection<UserCredential> UserCredentials { get; set; } = new List<UserCredential>();
 }

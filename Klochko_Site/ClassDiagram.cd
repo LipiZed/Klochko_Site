@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Klochko_Site.Models.Branch">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAIAAAAABAAAACAAAAAACAAAAIAAAAAA=</HashCode>
+      <FileName>Models\Branch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Klochko_Site.Models.Customer">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAABACBAAIAAAAAAAAAIAAAAABECAAAAIAAAAAA=</HashCode>
+      <FileName>Models\Customer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Klochko_Site.Models.DeliveryStatus">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAgAIAAAAAAAAAAIQAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DeliveryStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Klochko_Site.Models.Employee">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAACAAAIAgAAABAAAAAAAAAAgAAAAAIAACAAA=</HashCode>
+      <FileName>Models\Employee.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Klochko_Site.Models.ErrorViewModel">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ErrorViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Klochko_Site.Models.GeneralPostDbContext">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gIGCAAAQAQBQAIAAAAAAAAAIGAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\GeneralPostDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Klochko_Site.Models.Log">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAADAAAEAACAAAgAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\Log.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Klochko_Site.Models.Package">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAEAAIAAAAAAAABAAIAACIFAAggAQAABAAIAQA=</HashCode>
+      <FileName>Models\Package.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Klochko_Site.Models.PackageType">
+    <Position X="3.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAIAAAAAAAAAAAAAAABAgAAAAAAAAAAA=</HashCode>
+      <FileName>Models\PackageType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Klochko_Site.Models.Payment">
+    <Position X="10.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAGBAAAAAAEAAAAAACAAAACAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Payment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Klochko_Site.Models.Service">
+    <Position X="5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Models\Service.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Klochko_Site.Models.Transaction">
+    <Position X="13.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAABAAAAAACAQAACACAAAAAEAAAAAEAACAAA=</HashCode>
+      <FileName>Models\Transaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Klochko_Site.Models.UserCredential">
+    <Position X="6.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAAAAAAAAAEQAAAAAAAAAAABACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\UserCredential.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Klochko_Site.Models.UserRegisterViewModel">
+    <Position X="8.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAIAAAQAAAAAAAAAAAAACAAAAIAAAAAA=</HashCode>
+      <FileName>Models\UserRegisterViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AccountController">
+    <Position X="6.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAIAAAAAACAAAAAQAAAAAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Klochko_Site.Controllers.ClientController">
+    <Position X="12" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAFAEAABAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\ClientController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Klochko_Site.Controllers.HomeController">
+    <Position X="10.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABQAAAAAAAAAAIAABAQAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Klochko_Site.Controllers.OperatorController">
+    <Position X="3.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAFAAAAAAQAAAAAAgAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Controllers\OperatorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Klochko_Site.Controllers.PagesController">
+    <Position X="15.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAQIABADFAAAAAAQAAAAAAAAAAAAAAAIAAgA=</HashCode>
+      <FileName>Controllers\PagesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
